@@ -155,7 +155,7 @@
     public string? UserEmail { get; set; }
     private string UserImageSrc = "../images/Default_User.png";
     User? _user;
- 
+
 
     public async Task logout()
     {
@@ -176,7 +176,7 @@
         }
         catch (Exception ex)
         {
-             Console.WriteLine(ex.Message);
+            Console.WriteLine(ex.Message);
         }
 
 
@@ -189,7 +189,7 @@
         {
             _user = await UserService.GetUserByEmail(UserEmail);
             UserImageSrc = _user.Profile_Picture;
-            
+
         }
         catch (Exception ex)
         {
@@ -200,10 +200,13 @@
 
     public bool _isOpen;
 
-	public async Task ToggleOpen()
-	{
-		if (_isOpen)
-			_isOpen = false;
+    public async Task ToggleOpen()
+    {
+        if (_isOpen){
+            _isOpen = false;
+            counter = await NotificationService.GetNumberUnRead(UserEmail);
+
+        }
 		else
 			_isOpen = true;
 	}
