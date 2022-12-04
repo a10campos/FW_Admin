@@ -1,6 +1,8 @@
 ﻿@using MudBlazor
 @using Domain.Notifications.Entities
+@using Domain.Orders.Entities
 @using Application.Notifications
+@using Application.Orders
 
 @inject INotificationService NotificationService
 
@@ -19,17 +21,17 @@
 				}
 				else
 				{
-				<p style=" height: 40px; width: 220px; padding:10px;">
-					@notificationText
-				</p>
+					<p style=" height: 40px; width: 220px; padding:10px;">
+						@notificationText
+					</p>
 				}
 				<p style="height: 40px; width: 220px; padding:10px">@dateOfNotification</p>
 			</div>
 			@if (!stateNotification)
 			{
 				<div style=" height: 40px; width: 20px ;margin:10px">
-					<MudBadge  Color="Color.Info" Style=""/>
-			</div>
+					<MudBadge Color="Color.Info" Style="" />
+				</div>
 			}
 		</div>
 	</MudListItem>
@@ -44,24 +46,22 @@
 	[Parameter]
 	public DateTime dateOfNotification { get; set; }
 	[Parameter]
-	public bool stateNotification { get; set; } 
+	public bool stateNotification { get; set; }
 	[Parameter]
-	public Notification Notif { get; set; } 
-
+	public Notification Notif { get; set; }
+	[Parameter]
+	public Order order { get; set; }
+	[Parameter]
+	public string RecipientName { get; set; }
 
 	/// <summary>
 	/// When click the notification it changes the status
 	/// </summary>
 	/// <returns></returns>
-	private async Task clickedNotification(){
+	private async Task clickedNotification()
+	{
 
 		await NotificationService.readNotificationAsync(Notif);
 
-	}
-
-	protected override async Task OnInitializedAsync()
-	{
-		
-		
 	}
 }

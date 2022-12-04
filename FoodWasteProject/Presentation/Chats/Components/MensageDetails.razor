@@ -1,31 +1,29 @@
 ﻿@using MudBlazor
 @using Domain.Notifications.Entities
+@using Domain.Orders.Entities
 @using Application.Notifications
+@using Application.Chats
+@using Domain.Messages.Entities
 
 @inject INotificationService NotificationService
+@inject IMessageService MessageService
 
+@if (_isLoading)
+{
+	<LoadingCardsComponent></LoadingCardsComponent>
+}
+else{
 <MudList Clickable="true">
-	<MudListItem DisableGutters="true" Href="@link" OnClick="@clickedNotification">
+	<MudListItem DisableGutters="true" Href="@link">
 		<div style="display: flex; margin-left:10px;">
 			<div style="margin-right:8px">
 				<MudAvatar Image="https://cdn-icons-png.flaticon.com/512/1738/1738691.png" Style="height: 40px; width: 40px" />
 			</div>
 			<div>
-				@if (!stateNotification)
-				{
-					<p style=" height: 40px; width: 220px; padding:10px">
-						<b>@notificationText</b>
-					</p>
-				}
-				else
-				{
-				<p style=" height: 40px; width: 220px; padding:10px;">
-					@notificationText
-				</p>
-				}
-				<p style="height: 40px; width: 220px; padding:10px">@dateOfNotification</p>
+				<h6>Chat con @order.RecipientId</h6>
+				<p>@testo</p>
 			</div>
-			@if (!stateNotification)
+			@if (!false)
 			{
 				<div style=" height: 40px; width: 20px ;margin:10px">
 					<MudBadge  Color="Color.Info" Style=""/>
@@ -34,28 +32,31 @@
 		</div>
 	</MudListItem>
 </MudList>
+}
 
 @code {
-	 // Declaring parameters
+	// Declaring parameters
 	[Parameter]
-	public string notificationText { get; set; }
-	[Parameter]
+	public Order order { get; set; } 
+
 	public string link { get; set; }
-	[Parameter]
-	public DateTime dateOfNotification { get; set; }
-	[Parameter]
-	public bool stateNotification { get; set; } 
-	[Parameter]
-	public Notification Notif { get; set; } 
+
+	public IEnumerable<Message> _Messages;
+
+	public String testo;
+
+	bool _isLoading = true;
 
 
-	/// <summary>
-	/// When click the notification it changes the status
-	/// </summary>
-	/// <returns></returns>
-	private async Task clickedNotification(){
-
-		await NotificationService.readNotificationAsync(Notif);
-
+	protected override async Task OnInitializedAsync()
+	{
+		link = "chatRoom/" + order.Id;
+		_Messages = await MessageService.GetMessagesAsync(order.Id);
+		testo = _Messages.Last().Text;
+		_isLoading = false;
 	}
+
+
+
 }
+
