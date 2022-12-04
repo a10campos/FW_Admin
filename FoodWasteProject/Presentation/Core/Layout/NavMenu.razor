@@ -16,6 +16,7 @@
 @using Presentation.Users.Models
 @using Presentation.Notifications.Pages
 @using Application.Notifications;
+@using Presentation.Chats.Components;
 
 @inject INotificationService NotificationService
 @inject IAuthenticationService AuthenticationService
@@ -65,9 +66,12 @@
               <AuthorizeView Roles="Personal, Business">
                 <Authorized>
                     <MudIcon Icon="@Icons.Filled.CircleNotifications" Size="Size.Large" onclick="@(()=> ToggleOpen())" Style="color:white;height: 50px"/>
-                    <MudIcon Icon="@Icons.Filled.Chat" Size="Size.Large" onclick="@(()=> ToggleOpen())" Style="color:white;height: 50px"/> 
+                    <MudIcon Icon="@Icons.Filled.Chat" Size="Size.Large" onclick="@(()=> ToggleOpen2())" Style="color:white;height: 50px"/> 
                     <MudPopover Open="@_isOpen" AnchorOrigin="Origin.BottomRight" Elevation="10" TransformOrigin="Origin.TopRight" style="transition-duration: 251ms; transition-delay: 0ms; width:350px;">
                         <NotificationList></NotificationList>
+	                 </MudPopover>
+                      <MudPopover Open="@_isOpen2" AnchorOrigin="Origin.BottomRight" Elevation="10" TransformOrigin="Origin.TopRight" style="transition-duration: 251ms; transition-delay: 0ms; width:350px;">
+                        <ChatList></ChatList>
 	                 </MudPopover>
                 </Authorized>
             </AuthorizeView>
@@ -196,6 +200,7 @@
     }
 
     public bool _isOpen;
+    public bool _isOpen2;
 
 	public async Task ToggleOpen()
 	{
@@ -203,6 +208,13 @@
 			_isOpen = false;
 		else
 			_isOpen = true;
+	}
+    public async Task ToggleOpen2()
+	{
+		if (_isOpen2)
+			_isOpen2 = false;
+		else
+			_isOpen2 = true;
 	}
 }
 

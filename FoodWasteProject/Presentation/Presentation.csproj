@@ -54,10 +54,6 @@
 
 
   </ItemGroup>
-	
-	<ItemGroup>
-        <Folder Include="Chats\Components\" />
-	</ItemGroup>
 
   <ItemGroup>
     <Folder Include="Users\Components\" />
