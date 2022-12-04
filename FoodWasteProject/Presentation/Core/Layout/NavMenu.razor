@@ -63,7 +63,7 @@
             </AuthorizeView>
               <AuthorizeView Roles="Personal, Business">
                 <Authorized>
-                    <MudBadge Content="3" Overlap="true" Class="mx-6 my-4">
+                    <MudBadge Content="@counter" Overlap="true" Class="mx-6 my-4">
                         <MudIcon Icon="@Icons.Filled.CircleNotifications" Size="Size.Large" onclick="@(()=> ToggleOpen())" Style="color:white;height: 50px margin-right: 5px; margin-left: 5px;"/>
                     </MudBadge>
                     <MudBadge Content="3" Overlap="true" Class="mx-6 my-4">
@@ -155,6 +155,7 @@
     public string? UserEmail { get; set; }
     private string UserImageSrc = "../images/Default_User.png";
     User? _user;
+ 
 
     public async Task logout()
     {
@@ -178,7 +179,6 @@
              Console.WriteLine(ex.Message);
         }
 
-       
 
     }
 
