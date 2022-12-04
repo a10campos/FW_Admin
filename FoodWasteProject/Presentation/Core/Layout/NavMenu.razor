@@ -35,7 +35,6 @@
                     <MudButton StartIcon="@Icons.Filled.AddBox" Href="/donate" Style="color:white; width: 180px; height: 50px; font-size: 17px">Donación</MudButton>
                     <MudButton StartIcon="@Icons.Filled.RoomService" Href="/donationList" Style="color:white; width: 180px; height: 50px; font-size: 17px">Solicitar</MudButton>
                     <MudButton StartIcon="@Icons.Filled.Inventory" Href="/requestList" Style="color:white; width: 240px; height: 50px; font-size: 17px">Sus Solicitudes</MudButton>
-                    <MudButton StartIcon="@Icons.Filled.ConnectWithoutContact" Href="/campaignList" Style="color:white; width: 180px; height: 50px; font-size: 17px">Campañas</MudButton>
                 </Authorized>
             </AuthorizeView>
 
@@ -64,9 +63,13 @@
             </AuthorizeView>
               <AuthorizeView Roles="Personal, Business">
                 <Authorized>
-                    <MudIcon Icon="@Icons.Filled.CircleNotifications" Size="Size.Large" onclick="@(()=> ToggleOpen())" Style="color:white;height: 50px"/>
-                    <MudIcon Icon="@Icons.Filled.Chat" Size="Size.Large" onclick="@(()=> ToggleOpen())" Style="color:white;height: 50px"/> 
-                    <MudPopover Open="@_isOpen" AnchorOrigin="Origin.BottomRight" Elevation="10" TransformOrigin="Origin.TopRight" style="transition-duration: 251ms; transition-delay: 0ms; width:350px;">
+                    <MudBadge Content="3" Overlap="true" Class="mx-6 my-4">
+                        <MudIcon Icon="@Icons.Filled.CircleNotifications" Size="Size.Large" onclick="@(()=> ToggleOpen())" Style="color:white;height: 50px margin-right: 5px; margin-left: 5px;"/>
+                    </MudBadge>
+                    <MudBadge Content="3" Overlap="true" Class="mx-6 my-4">
+                        <MudIcon Icon="@Icons.Filled.Chat" Size="Size.Large" onclick="@(()=> ToggleOpen())" Style="color:white;height: 50px"/>
+                    </MudBadge>
+                     <MudPopover Open="@_isOpen" AnchorOrigin="Origin.BottomRight" Elevation="10" TransformOrigin="Origin.TopRight" style="transition-duration: 251ms; transition-delay: 0ms; width:350px;">
                         <NotificationList></NotificationList>
 	                 </MudPopover>
                 </Authorized>
